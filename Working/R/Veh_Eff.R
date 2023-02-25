@@ -16,6 +16,7 @@
 
 veh_eff = function (V, A, m, g = 9.8, p_air = 1.2, c_rol = 0.015, c_drag = 0.3) {
   #calculte
+  # calculte
   Pb = c_rol * m * g * V + 0.5 * A * p_air * c_drag * V^3
 return(Pb)
 }
