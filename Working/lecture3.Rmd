@@ -49,8 +49,8 @@ veh_power_gen = cbind.data.frame(V, Power1, Power2)
 #plot
 
 ggplot(data = veh_power_gen, aes(V, Power1)) + 
-        geom_line(col="blue") +
-        geom_line(aes(V, Power2), col="red") +
+        geom_line(col="red") +
+        geom_line(aes(V, Power2), col="blue") +
          labs(x="Velocity (m/s)", y="Power Comsumption (Watts)")
   
   
