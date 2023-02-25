@@ -1,0 +1,59 @@
+---
+title: "Lecture 3 Exercise"
+author: "Sage Davis"
+date: "2023-02-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+
+```{r, echo=FALSE}
+
+# Scenario 1
+
+m = 31752   # kg
+
+A = 16      # m2
+
+V = c(30, 8/3.6, 120/3.6, 40/3.6, 5/3.6) # Convert Velocities to m/s, 1 m/s = 3.6km/hr
+
+Power1 = veh_eff (V, A, m)
+
+```
+
+
+```{r, echo=FALSE}
+# Scenario 2
+
+m = 15000   # kg
+
+Power2 = veh_eff (V, A, m)
+
+```
+
+
+```{r, echo=FALSE}
+
+#combine Data into single dataframe 
+
+veh_power_gen = cbind.data.frame(V, Power1, Power2)
+
+```
+
+```{r, echo=FALSE}
+
+#plot
+
+ggplot(data = veh_power_gen, aes(V, Power1)) + 
+        geom_line(col="blue") +
+        geom_line(aes(V, Power2), col="red") +
+         labs(x="Velocity (m/s)", y="Power Comsumption (Watts)")
+  
+  
+
+```
+
