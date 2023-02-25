@@ -19,7 +19,7 @@ m = 31752   # kg
 
 A = 16      # m2
 
-V = c(30, 8/3.6, 120/3.6, 40/3.6, 5/3.6) # Convert Velocities to m/s, 1 m/s = 3.6km/hr
+V = c(30, 80/3.6, 120/3.6, 40/3.6, 5/3.6) # Convert Velocities to m/s, 1 m/s = 3.6km/hr
 
 Power1 = veh_eff (V, A, m)
 
