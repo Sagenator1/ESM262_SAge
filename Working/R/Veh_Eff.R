@@ -2,17 +2,16 @@
   
 #  Pb = c_rol * m * g * V + 0.5 * A * p_air * c_drag * V^3
   
-#  where c_rol and c_drag are rolling and aerodynamic resistive coefficients, typical values are 0.015 and 0.3, respectively.
-  
-#  V: is vehicle speed (assuming no headwind) in m/s (or mps) m: is vehicle mass in kg
-  
-# A is surface area of car (m2)
-  
-#  g: is acceleration due to gravity (9.8m/s2)
-  
-#  p_air = density of air (1.2kg/m3)
-  
-#  Pb is power in Watts
+#' This function determines the power required to keep a vehicle moving at 
+#' a given speed
+#' @param c_drag coefficient due to drag default=0.3 
+#' @param c_rol coefficient due to rolling/friction default=0.015
+#' @param V vehicle speed (m/2)
+#' @param m vehicle mass (kg)
+#' @param A area of front of vehicle (m2)
+#' @param g acceleration due to gravity (m/s) default=9.8
+#' @param pair (kg/m3) default =1.2
+#' @return power (W)
 
 veh_eff = function (V, A, m, g = 9.8, p_air = 1.2, c_rol = 0.015, c_drag = 0.3) {
   # calculte
