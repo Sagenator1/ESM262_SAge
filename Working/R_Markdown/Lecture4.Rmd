@@ -1,0 +1,86 @@
+---
+title: "Lecture 4 - Looping"
+author: "Sage Davis"
+date: "2023-02-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+
+
+```{r}
+
+# yield=1.8∗fertilizer2−0.5∗fertilizer+0.1∗TP
+
+nsample=10
+fert = rnorm(n=nsample, mean=5, sd= 0.5)
+tp = 0
+
+yield_list = data.frame(yield = NA, fert=fert, tp)
+
+for (y in 1:10) {
+  yield_list$yield[y] = 1.8*fert[y]^2 - 0.5*fert[y] + 0.1*tp
+  
+  
+}
+
+yield_sum=sum(yield_list$yield)
+
+
+
+```
+
+Make function to calculate yield each year
+
+```{r}
+
+# Step 2
+# yield=1.8∗fertilizer2−0.5∗fertilizer+0.1∗TP
+
+# function
+
+compute_yield2 = function(fert, tp) {
+  
+  
+  yield2=1.8*fert^2 - 0.5*fert + 0.1*tp
+
+  
+return (yield2)
+}
+
+yield_2 = compute_yield2(fert, tp)
+
+yield_2_sum = sum(yield_2)
+
+```
+
+
+Step 3 - sum the years in function
+
+```{r}
+
+# Step 3
+# yield=1.8∗fertilizer2−0.5∗fertilizer+0.1∗TP
+
+# function
+
+compute_sum_3 = function(fert, tp) {
+  #error checking
+  #if (tp==0) warning ("no rain, possibly bad yield")
+  
+  if (fert < 4.5) return("underfed crop, possible low yield")
+  # calculate yield
+    yield_3=1.8*fert^2 - 0.5*fert + 0.1*tp
+  # calculate sum
+    yield3_sum = sum(yield_3)
+  
+return (yield3_sum)
+}
+
+yield_3_sum = compute_sum_3(fert, tp)
+
+```
