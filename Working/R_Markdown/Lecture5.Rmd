@@ -1,0 +1,46 @@
+---
+title: "Lecture 5"
+author: "Sage Davis"
+date: "2023-03-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+```
+
+```{r}
+
+# Define parameters
+
+nsam = 10
+rate = rnorm(n = nsam, mean = 0.04, sd = .02)
+
+damage = rnorm(n = nsam, mean = 100, sd = 10)
+
+Inputs = data.frame(rate, damage)
+
+```
+
+```{r}
+
+# function 
+
+source("../R/NPV.R")
+
+```
+
+```{r}
+
+for [t 1:10] {
+  
+  
+}
+
+
+
+
+```
+
