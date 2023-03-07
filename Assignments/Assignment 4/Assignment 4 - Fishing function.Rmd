@@ -14,17 +14,24 @@ library(here)
 ```
 
 ```{r}
+
 # Read in data
-my_data <- read.delim("fish.txt")
+fish_data <- read.delim("fish.txt")
 
-catch <- c(my_data$x)
-
-catch1 <- as.factor(catch)
-
-summary(catch1)
-
-min(catch)
+# convert data frame to vector
+catch_vector <- c(fish_data$x)
 
 
+
+```
+
+
+```{r}
+
+# Call in function to calculate max, min and total species
+source("../R/fishing.R")
+
+# Use function to calculate max, min and total species for read in data
+diversity(catch_vector)
 ```
 
