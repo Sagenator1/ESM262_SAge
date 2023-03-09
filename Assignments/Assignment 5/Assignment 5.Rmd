@@ -1,0 +1,62 @@
+---
+title: "Assignment 5"
+author: "Daija Odom, Sage Davis, Kristin Art"
+date: "2023-03-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(purrr)
+library(ggpubr)
+```
+
+```{r}
+# source plant growth function
+source("../R/plant_growth.R")
+```
+
+
+```{r}
+# generate data inputs, one for each week of the year
+nsample = 52
+
+# mean number of watering per week
+water_mean = 2
+
+# sd waterings per week
+water_sd = 0.5
+
+# waterings per week
+water = rnorm(mean=water_mean, sd=water_sd, n=nsample)
+summary(water)
+
+# mean number of sun hours per week
+sun_mean = 21
+
+# sd sun hours per week
+sun_sd = 7
+
+# sun hours per week
+sun = rnorm(mean=sun_mean, sd=sun_sd, n=nsample)
+summary(sun)
+
+```
+
+```{r}
+# create data frame for growth - do we want to sum or just do incremental growth
+growth = as.data.frame(matrix(nrow=length(sun)), ncol=length(water))
+```
+
+
+```{r forloop}
+
+for (i in 1:nrow()) {
+  growth[,i] = plant_grow(sun=inputs$sun[i], water=inputs$water[i], pot=1)
+  growth[,i] = growth[,i-1]
+}
+
+```
+
