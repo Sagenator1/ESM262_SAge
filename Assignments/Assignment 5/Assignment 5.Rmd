@@ -11,13 +11,16 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(purrr)
 library(ggpubr)
+library(dplyr)
+library(tidyr)
+library(testthat)
 ```
 
 ```{r}
-# source plant growth function
-source("../R/plant_growth.R")
+# source plant growth function and run test
+source("Assignments/R/compute_plant_growth.R")
+test_file("Assignments/tests/test_compute_plant_growth.R")
 ```
-
 
 ```{r}
 # generate data inputs, one for each week of the year
@@ -43,20 +46,46 @@ sun_sd = 7
 sun = rnorm(mean=sun_mean, sd=sun_sd, n=nsample)
 summary(sun)
 
+#combine sun and water data into one df
+inputs_df <- data.frame(water = water, sun = sun)
+
+```
+
+```{r forloop}
+# create empty data frame for growth outputs - incremental
+#do we want to sum or just do incremental growth
+growth_df <- data.frame(growth = numeric(length(sun)), leaves = numeric(length(sun)))
+
+for (i in 1:nrow(inputs_df)) {
+  growth_df[i,] = compute_plant_growth(sun=inputs_df$sun[i], water=inputs_df$water[i], pot=1)
+  #growth_df[,i] = growth[,i+1]
+}
+
+head(growth_df)
+```
+
+```{r purrr::pmap()}
+#use pmap_dfc to apply plant growth function to inputs 
+growth_df2 <- pmap_dfc(list(inputs_df$sun, inputs_df$water, rep(1, nrow(inputs_df))), compute_plant_growth) %>% 
+  matrix(ncol = 2, byrow = TRUE) %>%
+  as.data.frame() %>% 
+  rename(growth =1, leaves =2)
+
+head(growth_df2)
 ```
 
 ```{r}
-# create data frame for growth - do we want to sum or just do incremental growth
-growth = as.data.frame(matrix(nrow=length(sun)), ncol=length(water))
-```
+#I just added a random plot for now. We can updated/ change this to whatever seems most interesting/ useful
+#combine inputs_df and growth data output into one df
+all_growth_df <- cbind(inputs_df,growth_df)
 
+#create plot of car powers based on method 1's data
+plot_1= ggplot(growth_df, aes(x = sun, y = growth))+
+  geom_line() +
+  labs(x = "Number of sun hours per week", y = "Plant Growth (mm)", title = "Plant growth over time based on sunlight availability")+
+  theme_minimal()+ 
+  theme(legend.position = "none")
 
-```{r forloop}
-
-for (i in 1:nrow()) {
-  growth[,i] = plant_grow(sun=inputs$sun[i], water=inputs$water[i], pot=1)
-  growth[,i] = growth[,i-1]
-}
-
+plot_1
 ```
 
