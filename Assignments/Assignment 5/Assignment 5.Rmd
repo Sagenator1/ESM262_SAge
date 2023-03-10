@@ -18,8 +18,8 @@ library(testthat)
 
 ```{r}
 # source plant growth function and run test
-source("Assignments/R/compute_plant_growth.R")
-test_file("Assignments/tests/test_compute_plant_growth.R")
+source("../R/compute_plant_growth.R")
+test_file("../tests/test_compute_plant_growth.R")
 ```
 
 ```{r}
