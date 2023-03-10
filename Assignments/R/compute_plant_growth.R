@@ -1,11 +1,15 @@
 #' Growth of Plant over time
 #' 
+#' Compute the growth of a plant over time
 #' @param sun number of sun hours per week
 #' @param water number of watering events per week
-#' @param pot #what did we say pot referred to again? Note that it is not curently used in our function
+#' @param pot size of pot the plant is growing in
+#' @return height of plant (in mm) and number of leaves 
 #' 
-#' function to calculate plant growth 
+
 compute_plant_growth = function(sun, water, pot = 1){
+  
+  #start with some error checking
   if(sun <0 ){
     stop("Number of sun hours cannot be less than 0")
   }
