@@ -51,6 +51,7 @@ inputs_df <- data.frame(water = water, sun = sun)
 
 ```
 
+
 ```{r forloop}
 # create empty data frame for growth outputs - incremental
 # do we want to sum or just do incremental growth
@@ -87,5 +88,16 @@ plot_1= ggplot(growth_df, aes(x = sun, y = growth, color = growth))+
   theme(legend.position = "none")
 
 plot_1
+```
+
+```{r}
+# Running test function 
+plant_growth = compute_plant_growth(sun = c(5,1,2), water = c(5,1,2))
+
+test_that("compute_plant_growth_works",{
+  expect_true(compute_plant_growth(sun, water)[[1]] > 0) 
+  expect_true(length(compute_plant_growth(sun,water))==2)
+})
+  
 ```
 
