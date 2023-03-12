@@ -62,20 +62,18 @@ inputs_df <- data.frame(water = water, sun = sun)
 
 ```{r forloop}
 # create empty data frame for growth outputs - incremental
-# do we want to sum or just do incremental growth
 growth_df <- data.frame(growth = numeric(length(sun)), leaves = numeric(length(sun)))
 
 for (i in 1:nrow(inputs_df)) {
   growth_df[i,] = compute_plant_growth(sun=inputs_df$sun[i], water=inputs_df$water[i], pot=1)
-  #growth_df[,i] = growth[,i+1]
+  # growth_df[,i] = growth[,i+1]
 }
 
 head(growth_df)
 ```
 
 ```{r}
-
-# separate data  generated for pmap
+# separate data generated for pmap
 # waterings per week
 water2 = rnorm(mean=water_mean, sd=water_sd, n=nsample)
 summary(water2)
@@ -100,11 +98,10 @@ head(growth_df2)
 ```
 
 ```{r}
-# I just added a random plot for now. We can update/change this to whatever seems most interesting/ useful
-# combine inputs_df and growth data output into one df
+# Combine inputs_df and growth data output into one df
 all_growth_df <- cbind(inputs_df,growth_df)
 
-# create plot of car powers based on method 1's data
+# Add a line graph to plot growth over time based on sunlight per week
 plot_1= ggplot(growth_df, aes(x = sun, y = growth, color = growth))+
   geom_line() + geom_point() +
   labs(x = "Amount of Sun (hours per week)", y = "Plant Growth (mm)", title = "Plant growth over time based on Sunlight Availability")+
