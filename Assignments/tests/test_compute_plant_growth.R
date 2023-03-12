@@ -1,7 +1,7 @@
 test_that("compute_plant_growth_works",{
   
   # calculation test
-  expect_equal(compute_plant_growth(sun=sun_t, water=water_t), list(2.6,0.26))
+  expect_equal(compute_plant_growth(sun = 1, water = 1), list(2.6,0.26))
   
   # test that pot can make plat grow alone - funny
   expect_equal(compute_plant_growth(sun = 0, water = 0), list(0.1, 0.01))

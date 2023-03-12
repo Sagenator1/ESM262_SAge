@@ -17,7 +17,7 @@ library(testthat)
 ```
 
 ```{r}
-# source plant growth function and error check
+# source plant growth function
 source("../R/compute_plant_growth.R")
 
 # error check function, make sun = -1
@@ -27,8 +27,6 @@ compute_plant_growth(sun = -1,water = 0)
 compute_plant_growth(sun = 0,water = -1)
 
 # test function output
-sun_t = 1
-water_t = 1
 test_file("../tests/test_compute_plant_growth.R")
 ```
 
