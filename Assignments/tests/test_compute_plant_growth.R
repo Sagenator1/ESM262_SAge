@@ -1,5 +1,12 @@
 test_that("compute_plant_growth_works",{
   
-  expect_true(compute_plant_growth(sun, water)[[1]] > 0) 
-  expect_true(length(compute_plant_growth(sun,water))==2)
+  # calculation test
+  expect_equal(compute_plant_growth(sun=sun_t, water=water_t), list(2.6,0.26))
+  
+  # test that pot can make plat grow alone - funny
+  expect_equal(compute_plant_growth(sun = 0, water = 0), list(0.1, 0.01))
+  
+  # test that pot is accounted for
+  expect_equal(compute_plant_growth(sun = 0, water = 0), list(0,0))
+  
 })

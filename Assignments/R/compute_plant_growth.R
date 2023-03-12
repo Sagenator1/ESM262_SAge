@@ -21,8 +21,11 @@ compute_plant_growth = function(sun, water, pot = 1){
   # stop("Number of watering events cannot be less than 0")
   #}
   
-  growth = 2*sun + 0.5*water
+  growth = 2*sun + 0.5*water + 0.1*pot
   leaves = 0.1*growth
   
   return(list(growth, leaves))
 }
+
+
+

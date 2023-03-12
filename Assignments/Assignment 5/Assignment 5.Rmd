@@ -17,8 +17,18 @@ library(testthat)
 ```
 
 ```{r}
-# source plant growth function and run test
+# source plant growth function and error check
 source("../R/compute_plant_growth.R")
+
+# error check function, make sun = -1
+compute_plant_growth(sun = -1,water = 0)
+
+# error check function, make water = -1
+compute_plant_growth(sun = 0,water = -1)
+
+# test function output
+sun_t = 1
+water_t = 1
 test_file("../tests/test_compute_plant_growth.R")
 ```
 
@@ -65,9 +75,25 @@ for (i in 1:nrow(inputs_df)) {
 head(growth_df)
 ```
 
+```{r}
+
+# separate data  generated for pmap
+# waterings per week
+water2 = rnorm(mean=water_mean, sd=water_sd, n=nsample)
+summary(water2)
+
+# sun hours per week
+sun2 = rnorm(mean=sun_mean, sd=sun_sd, n=nsample)
+summary(sun2)
+
+# combine sun and water data into one df
+inputs_df2 <- data.frame(water = water2, sun = sun2)
+
+```
+
 ```{r purrr::pmap()}
 # use pmap_dfc to apply plant growth function to inputs 
-growth_df2 <- pmap_dfc(list(inputs_df$sun, inputs_df$water, rep(1, nrow(inputs_df))), compute_plant_growth) %>% 
+growth_df2 <- pmap_dfc(list(inputs_df2$sun, inputs_df2$water, rep(1, nrow(inputs_df2))), compute_plant_growth) %>% 
   matrix(ncol = 2, byrow = TRUE) %>%
   as.data.frame() %>% 
   rename(growth =1, leaves =2)
@@ -90,15 +116,4 @@ plot_1= ggplot(growth_df, aes(x = sun, y = growth, color = growth))+
 plot_1
 ```
 
-```{r}
-# Running test function in RMarkdown before saving in separate test file
-# tests still will not run after I tried fixing the error checking in function
-plant_growth = compute_plant_growth(sun = c(5,1,2), water = c(5,1,2))
-
-test_that("compute_plant_growth_works",{
-  expect_true(compute_plant_growth(sun, water)[[1]] > 0) 
-  expect_true(length(compute_plant_growth(sun,water))==2)
-})
-  
-```
 
