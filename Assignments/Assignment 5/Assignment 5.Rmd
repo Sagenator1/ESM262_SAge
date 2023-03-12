@@ -91,7 +91,8 @@ plot_1
 ```
 
 ```{r}
-# Running test function 
+# Running test function in RMarkdown before saving in separate test file
+# tests still will not run after I tried fixing the error checking in function
 plant_growth = compute_plant_growth(sun = c(5,1,2), water = c(5,1,2))
 
 test_that("compute_plant_growth_works",{
