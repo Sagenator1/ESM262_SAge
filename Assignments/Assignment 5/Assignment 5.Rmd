@@ -2,11 +2,13 @@
 title: "Assignment 5"
 author: "Sage Davis, Kristin Art, Daija Odom"
 date: "2023-03-08"
-output: html_document
+output:   
+  html_document:
+    code_folding: hide
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, echo = TRUE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, results = FALSE)
 
 library(tidyverse)
 library(purrr)
@@ -18,7 +20,8 @@ library(testthat)
 
 ```{r}
 # source plant growth function
-source("../R/compute_plant_growth.R")
+#source("../R/compute_plant_growth.R")
+source("Assignments/R/compute_plant_growth.R")
 
 # error check function, make sun = -1
 compute_plant_growth(sun = -1,water = 0)
@@ -27,7 +30,8 @@ compute_plant_growth(sun = -1,water = 0)
 compute_plant_growth(sun = 0,water = -1)
 
 # test function output
-test_file("../tests/test_compute_plant_growth.R")
+#test_file("../tests/test_compute_plant_growth.R")
+test_file("Assignments/tests/test_compute_plant_growth.R")
 ```
 
 ```{r}
@@ -58,7 +62,6 @@ summary(sun)
 inputs_df <- data.frame(water = water, sun = sun)
 
 ```
-
 
 ```{r forloop}
 # create empty data frame for growth outputs - incremental
@@ -98,11 +101,13 @@ head(growth_df2)
 ```
 
 ```{r}
-# Combine inputs_df and growth data output into one df
+# Combine inputs_df and growth data output into one df for plotting
 all_growth_df <- cbind(inputs_df,growth_df)
+```
 
+```{r plot_1, out.width="90%", fig.align = 'center', fig.cap = "**Figure 1: Line graph of plant growth (mm) over time based on sunlight availability.**"}
 # Add a line graph to plot growth over time based on sunlight per week
-plot_1= ggplot(growth_df, aes(x = sun, y = growth, color = growth))+
+plot_1 = ggplot(growth_df, aes(x = sun, y = growth, color = growth))+
   geom_line() + geom_point() +
   labs(x = "Amount of Sun (hours per week)", y = "Plant Growth (mm)", title = "Plant growth over time based on Sunlight Availability")+
   theme_minimal()+ 
