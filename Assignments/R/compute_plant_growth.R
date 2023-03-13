@@ -13,7 +13,7 @@ compute_plant_growth = function(sun, water, pot = 1){
   sun = ifelse((sun < 0 ), return("Sun cannot be less than 0"), sun)
   water = ifelse((water < 0), return("Water cannot be less than 0"), water)
   
-  growth = 2*sun + 0.5*water + 0.1*pot
+  growth = (2*sun + 0.5*water)*pot
   leaves = 0.1*growth
   
   return(list(growth, leaves))
