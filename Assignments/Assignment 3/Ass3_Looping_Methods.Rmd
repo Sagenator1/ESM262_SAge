@@ -22,9 +22,9 @@ Imagine with have 4 different car types - and we know how often each occurs:
 
 * car B mass 65000 kg, area 30 m^2
 
-* car C mass 38000 kg area 22 m^2
+* car C mass 38000 kg, area 22 m^2
 
-* car D mass 5,000 kg area 10 m^2 
+* car D mass 5,000 kg, area 10 m^2 
 
 Mean highway speed is 80 km/hr w/ sd = 10 m^2
 
