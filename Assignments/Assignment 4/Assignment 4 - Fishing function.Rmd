@@ -1,0 +1,37 @@
+---
+title: "Assignment 4"
+author: "Sage Davis"
+date: "2023-03-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+
+
+```
+
+```{r}
+
+# Read in data
+fish_data <- read.delim("fish.txt")
+
+# convert data frame to vector
+catch_vector <- c(fish_data$x)
+
+
+
+```
+
+
+```{r}
+
+# Call in function to calculate max, min and total species
+source("../R/fishing.R")
+
+# Use function to calculate max, min and total species for read in data
+diversity(catch_vector)
+```
+
